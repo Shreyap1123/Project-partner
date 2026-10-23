@@ -1,14 +1,15 @@
 # Multi-stage build for ProjectPartner Spring Boot Backend
-FROM maven:3-eclipse-temurin-8-alpine AS build
+FROM maven:3.9-eclipse-temurin-17-alpine AS build
 WORKDIR /workspace
 
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
 COPY src ./src
+
+# Build production executable JAR
 RUN mvn clean package -DskipTests
 
-# Minimal runtime image (official Eclipse Temurin)
-FROM eclipse-temurin:8-jre-alpine
+# Minimal runtime image using modern Eclipse Temurin 17 JRE
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=build /workspace/target/*.jar app.jar
 
