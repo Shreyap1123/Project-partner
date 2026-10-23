@@ -7,6 +7,7 @@
 
 <br/>
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://project-partner-7b474t7bu-shreya-b515.vercel.app/)
 [![Build & Test Status](https://img.shields.io/badge/Build-Passing-10b981?style=for-the-badge&logo=githubactions&logoColor=white)](#-testing--quality-assurance)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.18-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Java](https://img.shields.io/badge/Java-8%2B%20%7C%2017%20%7C%2021-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
@@ -18,13 +19,29 @@
 
 <br/>
 
-[🚀 Quick Start](#-getting-started) • [🌟 Core Features](#-key-features) • [🧠 Matching Algorithm](#-algorithmic-matchmaking-engine) • [👥 Demo Personas](#-pre-seeded-demo-personas) • [📡 REST API](#-rest-api-documentation) • [🏛️ Architecture](#-system-architecture)
+[🌐 Live Demo](https://project-partner-7b474t7bu-shreya-b515.vercel.app/) • [🚀 Quick Start](#-getting-started) • [🌟 Core Features](#-key-features) • [🧠 Matching Algorithm](#-algorithmic-matchmaking-engine) • [👥 Demo Personas](#-pre-seeded-demo-personas) • [📡 REST API](#-rest-api-documentation) • [🏛️ Architecture](#-system-architecture)
 
 ---
 
 </div>
 
 <br/>
+
+## 🌐 Live Production Deployment
+
+Experience the live application deployed on the cloud:
+
+| Component | Platform | Live URL | Status |
+| :--- | :--- | :--- | :--- |
+| **Frontend Web App** | **Vercel** | [https://project-partner-7b474t7bu-shreya-b515.vercel.app/](https://project-partner-7b474t7bu-shreya-b515.vercel.app/) | ![Deployed](https://img.shields.io/badge/Deployed-Ready-success?style=flat-square&logo=vercel) |
+| **Backend REST API** | **Render (Docker)** | Cloud Container Service | ![Running](https://img.shields.io/badge/Running-Active-success?style=flat-square&logo=render) |
+
+> [!TIP]
+> **Try it immediately**: Open the [Live Demo](https://project-partner-7b474t7bu-shreya-b515.vercel.app/) and explore using the **Persona Switcher** in the top navigation bar or log in with one of our [Pre-seeded Demo Personas](#-pre-seeded-demo-personas) to test student and admin workspaces instantly without registering.
+
+<br/>
+
+---
 
 ## 📖 Overview
 
