@@ -42,7 +42,7 @@ Instead of relying on random group assignments or manual bulletin boards, **Proj
 ┌──────────────────────────────────────────────────────────────────────────────────┐
 │                                PROJECTPARTNER ECOSYSTEM                          │
 ├────────────────────────────┬────────────────────────────┬────────────────────────┤
-│  🎯 Matchmaking Engine     │  💼 Collaborative Workspace│  🛡️ Admin Governance   │
+│  🎯 Matchmaking Engine    │💼 Collaborative Workspace  │  🛡️ Admin Governance   │
 │  • Weighted Skill Scoring  │  • Agile Kanban Board      │  • Real-Time Metrics   │
 │  • Domain Affinity Match   │  • Sprint Milestone Tracker│  • User Moderation     │
 │  • Availability Balancing  │  • Internal Bulletin Board │  • Project Oversight   │
