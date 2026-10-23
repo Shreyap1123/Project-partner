@@ -134,9 +134,13 @@ export const api = {
     return handleResponse(res);
   },
 
-  // 3. Recommendation & Matching Module
-  getTeammateRecommendations: async (projectId, limit = 15) => {
-    const res = await fetch(`${API_BASE}/recommendations/teammates/${projectId}?limit=${limit}`, {
+  getTeammateRecommendations: async (projectId, limit = 15, filters = {}) => {
+    const params = new URLSearchParams();
+    params.append('limit', limit);
+    if (filters?.skill) params.append('skill', filters.skill);
+    if (filters?.department) params.append('department', filters.department);
+    if (filters?.minHours) params.append('minHours', filters.minHours);
+    const res = await fetch(`${API_BASE}/recommendations/teammates/${projectId}?${params.toString()}`, {
       headers: getAuthHeaders()
     });
     return handleResponse(res);

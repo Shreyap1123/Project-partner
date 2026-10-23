@@ -31,7 +31,8 @@ export const Navbar = ({ onOpenNotifications, onNavigate }) => {
     { name: 'Sarah Jenkins', email: 'sarah@campus.edu', role: 'AI Lead & Project Creator', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
     { name: 'Alex Chen', email: 'alex@campus.edu', role: 'Full Stack & CampusPay Lead', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150' },
     { name: 'Priya Patel', email: 'priya@campus.edu', role: 'UI/UX & HealthSync Lead', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150' },
-    { name: 'Elena Rostova', email: 'elena@campus.edu', role: 'NLP Researcher & Teammate Candidate', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150' }
+    { name: 'Elena Rostova', email: 'elena@campus.edu', role: 'NLP Researcher & Teammate Candidate', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150' },
+    { name: 'Platform Admin', email: 'admin@projectpartner.com', role: 'System Governance & Moderation', avatar: null }
   ];
 
   return (

@@ -19,4 +19,6 @@ public interface TeamRequestRepository extends JpaRepository<TeamRequest, Long> 
     Optional<TeamRequest> findByProjectIdAndSenderIdAndReceiverIdAndStatus(Long projectId, Long senderId, Long receiverId, RequestStatus status);
     long countByStatus(RequestStatus status);
     void deleteByProjectId(Long projectId);
+    void deleteBySenderId(Long senderId);
+    void deleteByReceiverId(Long receiverId);
 }

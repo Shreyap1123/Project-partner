@@ -88,6 +88,7 @@ public class ProjectProgressService {
 
         verifyMemberOrLeader(milestone.getProject().getId(), userId);
         milestone.setStatus(status);
+        milestone.setCompletedAt(status == MilestoneStatus.COMPLETED ? java.time.LocalDateTime.now() : null);
         ProjectMilestone saved = milestoneRepository.save(milestone);
         return mapMilestoneToDto(saved);
     }

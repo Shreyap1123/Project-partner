@@ -21,8 +21,11 @@ public class RecommendationController {
     @GetMapping("/teammates/{projectId}")
     public ResponseEntity<List<MatchCandidateDto>> getTeammateRecommendations(
             @PathVariable Long projectId,
+            @RequestParam(required = false) String skill,
+            @RequestParam(required = false) String department,
+            @RequestParam(required = false) Integer minHours,
             @RequestParam(defaultValue = "15") int limit) {
-        List<MatchCandidateDto> recommendations = recommendationService.recommendTeammatesForProject(projectId, limit);
+        List<MatchCandidateDto> recommendations = recommendationService.recommendTeammatesForProject(projectId, skill, department, minHours, limit);
         return ResponseEntity.ok(recommendations);
     }
 

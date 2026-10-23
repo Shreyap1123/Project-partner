@@ -30,7 +30,7 @@ public class RecommendationService {
     private TeamService teamService;
 
     @Transactional(readOnly = true)
-    public List<MatchCandidateDto> recommendTeammatesForProject(Long projectId, int limit) {
+    public List<MatchCandidateDto> recommendTeammatesForProject(Long projectId, String skill, String department, Integer minHours, int limit) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new RuntimeException("Project not found with id: " + projectId));
 
@@ -46,11 +46,31 @@ public class RecommendationService {
         List<MatchCandidateDto> candidateDtos = new ArrayList<>();
 
         for (StudentProfile student : allStudents) {
-            if (student.getUser() == null || existingMemberUserIds.contains(student.getUser().getId())) {
+            if (student.getUser() == null || !student.getUser().isEnabled() || existingMemberUserIds.contains(student.getUser().getId())) {
+                continue;
+            }
+
+            if (department != null && !department.trim().isEmpty() &&
+                    (student.getDepartment() == null || !student.getDepartment().toLowerCase().contains(department.trim().toLowerCase()))) {
+                continue;
+            }
+
+            if (minHours != null && minHours > 0 &&
+                    (student.getAvailableHoursPerWeek() == null || student.getAvailableHoursPerWeek() < minHours)) {
                 continue;
             }
 
             MatchCandidateDto candidate = evaluateStudentForProject(student, project, requiredSkills);
+
+            if (skill != null && !skill.trim().isEmpty()) {
+                String targetSkill = skill.trim().toLowerCase();
+                boolean hasSkill = candidate.getMatchedSkills().stream()
+                        .anyMatch(s -> s.getName().toLowerCase().contains(targetSkill));
+                if (!hasSkill) {
+                    continue;
+                }
+            }
+
             candidateDtos.add(candidate);
         }
 
@@ -61,6 +81,11 @@ public class RecommendationService {
             return candidateDtos.subList(0, limit);
         }
         return candidateDtos;
+    }
+
+    @Transactional(readOnly = true)
+    public List<MatchCandidateDto> recommendTeammatesForProject(Long projectId, int limit) {
+        return recommendTeammatesForProject(projectId, null, null, null, limit);
     }
 
     @Transactional(readOnly = true)

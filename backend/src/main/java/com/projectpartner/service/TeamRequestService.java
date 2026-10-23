@@ -64,9 +64,14 @@ public class TeamRequestService {
             throw new RuntimeException("Cannot send request: Project team is already full!");
         }
 
-        // Check for existing pending request
+        // Check for existing pending request in either direction
         teamRequestRepository.findByProjectIdAndSenderIdAndReceiverIdAndStatus(
                 project.getId(), sender.getId(), receiver.getId(), RequestStatus.PENDING
+        ).ifPresent(r -> {
+            throw new RuntimeException("A pending request already exists between you for this project");
+        });
+        teamRequestRepository.findByProjectIdAndSenderIdAndReceiverIdAndStatus(
+                project.getId(), receiver.getId(), sender.getId(), RequestStatus.PENDING
         ).ifPresent(r -> {
             throw new RuntimeException("A pending request already exists between you for this project");
         });
@@ -107,6 +112,15 @@ public class TeamRequestService {
                     : request.getReceiver().getId();
 
             teamService.addMember(request.getProject().getId(), candidateUserId, request.getProposedRole());
+
+            // Also mark any reverse pending request between them as resolved
+            teamRequestRepository.findByProjectIdAndSenderIdAndReceiverIdAndStatus(
+                    request.getProject().getId(), request.getReceiver().getId(), request.getSender().getId(), RequestStatus.PENDING
+            ).ifPresent(other -> {
+                other.setStatus(RequestStatus.ACCEPTED);
+                other.setRespondedAt(LocalDateTime.now());
+                teamRequestRepository.save(other);
+            });
         } else {
             request.setStatus(RequestStatus.REJECTED);
             request.setRespondedAt(LocalDateTime.now());

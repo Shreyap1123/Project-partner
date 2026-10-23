@@ -206,6 +206,8 @@ public class TeamService {
         teamRequestRepository.deleteByProjectId(projectId);
         teamMemberRepository.deleteByProjectId(projectId);
         requiredSkillRepository.deleteByProjectId(projectId);
+        if (project.getMembers() != null) project.getMembers().clear();
+        if (project.getRequiredSkills() != null) project.getRequiredSkills().clear();
         projectRepository.delete(project);
     }
 

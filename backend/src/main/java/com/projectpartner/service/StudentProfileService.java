@@ -30,7 +30,7 @@ public class StudentProfileService {
     @Autowired
     private StudentProjectRepository studentProjectRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public StudentProfileDto getProfileByUserId(Long userId) {
         StudentProfile profile = studentProfileRepository.findByUserId(userId)
                 .orElseGet(() -> {

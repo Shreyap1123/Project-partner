@@ -45,6 +45,12 @@ public class AdminService {
     private TeamMemberRepository teamMemberRepository;
 
     @Autowired
+    private ProjectTaskRepository taskRepository;
+
+    @Autowired
+    private TeamMessageRepository teamMessageRepository;
+
+    @Autowired
     private TeamService teamService;
 
     @Autowired
@@ -152,22 +158,37 @@ public class AdminService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
 
-        // Delete any projects led by user
+        // 1. Unassign user from any tasks
+        List<ProjectTask> assignedTasks = taskRepository.findByAssignedToId(userId);
+        for (ProjectTask task : assignedTasks) {
+            task.setAssignedTo(null);
+            taskRepository.save(task);
+        }
+
+        // 2. Delete team messages sent by user
+        teamMessageRepository.deleteBySenderId(userId);
+
+        // 3. Delete team requests involving user as sender or receiver
+        teamRequestRepository.deleteBySenderId(userId);
+        teamRequestRepository.deleteByReceiverId(userId);
+
+        // 4. Delete any projects led by user
         List<Project> led = projectRepository.findByLeaderId(userId);
         for (Project p : led) {
             teamService.deleteProject(p.getId(), null);
         }
 
-        // Remove from team memberships
+        // 5. Remove from team memberships
         teamMemberRepository.deleteByUserId(userId);
 
-        // Remove profile, student skills, past projects
+        // 6. Remove profile, student skills, past projects
         studentProfileRepository.findByUserId(userId).ifPresent(profile -> {
             studentSkillRepository.deleteByStudentProfileId(profile.getId());
             studentProjectRepository.deleteByStudentProfileId(profile.getId());
             studentProfileRepository.delete(profile);
         });
 
+        // 7. Delete the user
         userRepository.delete(user);
     }
 }

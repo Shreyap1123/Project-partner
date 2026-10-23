@@ -10,4 +10,5 @@ import java.util.List;
 public interface TeamMessageRepository extends JpaRepository<TeamMessage, Long> {
     List<TeamMessage> findByProjectIdOrderByCreatedAtAsc(Long projectId);
     void deleteByProjectId(Long projectId);
+    void deleteBySenderId(Long senderId);
 }
