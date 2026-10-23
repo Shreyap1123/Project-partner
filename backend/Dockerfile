@@ -1,5 +1,5 @@
 # Multi-stage build for ProjectPartner Spring Boot Backend
-FROM maven:3.8.8-openjdk-8-slim AS build
+FROM maven:3-openjdk-8-slim AS build
 WORKDIR /workspace
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
